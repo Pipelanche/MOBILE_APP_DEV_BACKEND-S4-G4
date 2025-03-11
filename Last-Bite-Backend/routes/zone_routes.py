@@ -8,13 +8,13 @@ zone_bp = Blueprint("zone_bp", __name__)
 zone_schema = ZoneSchema()
 zones_schema = ZoneSchema(many=True)
 
-# ✅ GET all zones (using schema serialization)
+#GET all zones (using schema serialization)
 @zone_bp.route("/", methods=["GET"])
 def get_zones():
     zones_list = get_all_zones()
     return jsonify(zones_schema.dump(zones_list))
 
-# ✅ GET a single zone by ID
+#GET a single zone by ID
 @zone_bp.route("/<int:zone_id>", methods=["GET"])
 def get_zone(zone_id):
     zone = get_zone_by_id(zone_id)
@@ -22,7 +22,7 @@ def get_zone(zone_id):
         return jsonify(zone_schema.dump(zone))
     return jsonify({"error": "Zone not found"}), 404
 
-# ✅ CREATE a new zone (with schema validation)
+#CREATE a new zone (with schema validation)
 @zone_bp.route("/", methods=["POST"])
 def add_zone():
     data = request.get_json()
@@ -35,7 +35,7 @@ def add_zone():
     new_zone = create_zone(data["zone_name"])
     return jsonify(zone_schema.dump(new_zone)), 201
 
-# ✅ UPDATE a zone (with schema validation)
+#UPDATE a zone (with schema validation)
 @zone_bp.route("/<int:zone_id>", methods=["PUT"])
 def modify_zone(zone_id):
     data = request.get_json()
