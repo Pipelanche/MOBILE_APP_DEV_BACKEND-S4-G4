@@ -1,12 +1,14 @@
 from flask import Blueprint, jsonify, request
-from services.zone_service import get_all_zones, get_zone_by_id, create_zone, update_zone, delete_zone
+from services.zone_service import *
 from schemas.zone_schema import ZoneSchema
+from schemas.area_schema import AreaSchema
 
 zone_bp = Blueprint("zone_bp", __name__)
 
 # Initialize schemas
 zone_schema = ZoneSchema()
 zones_schema = ZoneSchema(many=True)
+areas_schema = AreaSchema(many=True) 
 
 #GET all zones (using schema serialization)
 @zone_bp.route("/", methods=["GET"])
@@ -57,3 +59,9 @@ def remove_zone(zone_id):
     if result:
         return jsonify(result)
     return jsonify({"error": "Zone not found"}), 404
+
+# ✅ GET all areas of a specific zone
+@zone_bp.route("/<int:zone_id>/areas", methods=["GET"])
+def get_zone_areas(zone_id):
+    areas = get_areas_by_zone(zone_id)
+    return jsonify(areas_schema.dump(areas))

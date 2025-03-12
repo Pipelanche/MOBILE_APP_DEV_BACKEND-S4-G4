@@ -1,4 +1,5 @@
 from models.zone import Zone
+from models.area import Area
 from app import db
 
 def get_all_zones():
@@ -32,3 +33,8 @@ def delete_zone(zone_id):
         db.session.commit()
         return {"message": f"Zone {zone_id} deleted successfully"}
     return None
+
+def get_areas_by_zone(zone_id):
+    """Fetch all areas that belong to a specific zone."""
+    areas = Area.query.filter_by(zone_id=zone_id).all()
+    return [{"area_id": a.area_id, "area_name": a.area_name, "zone_id": a.zone_id} for a in areas]
