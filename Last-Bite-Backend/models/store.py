@@ -11,6 +11,9 @@ class Store(db.Model):
     latitude = db.Column(db.Float, nullable=False)  # Latitude for Google Maps
     logo = db.Column(db.String(1000), nullable=False)  # Store logo URL
 
+    #Relationship with users store that have all the users from the store
+    users = db.relationship("UserStore", back_populates="store", cascade="all, delete-orphan")
+
     def __init__(self, nit, name, address, longitude, latitude, logo):
         self.nit = nit
         self.name = name
