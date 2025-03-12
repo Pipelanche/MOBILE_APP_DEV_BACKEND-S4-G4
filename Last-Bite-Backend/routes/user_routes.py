@@ -32,7 +32,7 @@ def add_user():
     if errors:
         return jsonify(errors), 400
 
-    new_user = create_user(data["name"], data["user_email"], data["mobile_number"], data["area_id"], data["user_type"], data.get("description"))
+    new_user = create_user(data["name"], data["user_email"], data["mobile_number"], data["area_id"],  data.get("verification_code"), data["user_type"], data.get("description"))
     return jsonify(user_schema.dump(new_user)), 201
 
 # ✅ UPDATE a user
@@ -45,7 +45,7 @@ def modify_user(user_id):
     if errors:
         return jsonify(errors), 400
 
-    updated_user = update_user(user_id, data["name"], data["user_email"], data["mobile_number"], data["area_id"], data["user_type"], data.get("description"))
+    updated_user = update_user(user_id, data["name"], data["user_email"], data["mobile_number"], data["area_id"], data["verification_code"], data["user_type"], data.get("description"))
     if updated_user:
         return jsonify(user_schema.dump(updated_user))
     return jsonify({"error": "User not found"}), 404

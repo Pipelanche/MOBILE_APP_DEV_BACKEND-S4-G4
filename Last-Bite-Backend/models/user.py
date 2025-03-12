@@ -10,6 +10,7 @@ class User(db.Model):
     user_email = db.Column(db.String(240), nullable=False, unique=True)
     mobile_number = db.Column(db.String(60), nullable=False)
     area_id = db.Column(db.Integer, db.ForeignKey("area.area_id"), nullable=False)
+    verification_code = db.Column(db.Integer, nullable=False)
 
     # Using Enum for user_type
     user_type = db.Column(db.Enum(UserType, name="user_type_enum"), nullable=False)  # CUSTOMER, DELIVERY, STORE
@@ -19,10 +20,11 @@ class User(db.Model):
     # Relationship with Area
     area = db.relationship("Area", back_populates="users")
 
-    def __init__(self, name, user_email, mobile_number, area_id, user_type, description=None):
+    def __init__(self, name, user_email, mobile_number, area_id, verification_code ,user_type, description=None):
         self.name = name
         self.user_email = user_email
         self.mobile_number = mobile_number
         self.area_id = area_id
+        self.verification_code = verification_code
         self.user_type = UserType(user_type)  # Ensure input is a valid enum
         self.description = description
