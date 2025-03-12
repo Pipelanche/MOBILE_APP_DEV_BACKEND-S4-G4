@@ -235,7 +235,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "Get area by id",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -259,7 +259,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "Update area by id",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -292,7 +292,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "Delete Area by id",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -450,6 +450,147 @@
 							"path": [
 								"api",
 								"users",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stores",
+			"item": [
+				{
+					"name": "Get all stores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/stores",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nit\": \"910112233-4\",\n    \"name\": \"SuperTech Electronics\",\n    \"address\": \"1234 Innovation Ave, Medellín\",\n    \"longitude\": -75.5703,\n    \"latitude\": 6.2518,\n    \"logo\": \"https://example.com/supertech.png\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/stores",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get store by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/stores/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"stores",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Store",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nit\": \"910112233-5\",\n    \"name\": \"SuperTech Electronics\",\n    \"address\": \"1234 Innovation Ave, Medellín\",\n    \"longitude\": -75.5703,\n    \"latitude\": 6.2518,\n    \"logo\": \"https://example.com/supertech.png\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/stores/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"stores",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Store",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/stores/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"stores",
 								"11"
 							]
 						}
