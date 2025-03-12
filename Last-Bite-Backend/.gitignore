@@ -144,3 +144,11 @@ cython_debug/
 
 #DataBase
 test.db
+
+
+#Mac OS folder files
+.DS_Store
+
+#config and database
+config.py
+instance/
