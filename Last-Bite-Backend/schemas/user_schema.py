@@ -3,9 +3,9 @@ from enumerations.enums import UserType  # Import UserType Enum
 
 class UserSchema(Schema):
     user_id = fields.Int(dump_only=True)  # Auto-generated primary key
-    name = fields.Str(required=True, validate=validate.Length(max=150))
+    name = fields.Str(required=True, validate=validate.Length(min=1,max=150))
     user_email = fields.Email(required=True, validate=validate.Length(max=240))
-    mobile_number = fields.Str(required=True, validate=validate.Length(max=60))
+    mobile_number = fields.Str(required=True, validate=validate.Length(min=1,max=60))
     area_id = fields.Int(required=True)  # Foreign Key
     verification_code = fields.Int(required=True)
 
