@@ -106,7 +106,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+#.env
 .venv
 env/
 venv/
@@ -150,5 +150,5 @@ test.db
 .DS_Store
 
 #config and database
-config.py
+#config.py
 instance/
