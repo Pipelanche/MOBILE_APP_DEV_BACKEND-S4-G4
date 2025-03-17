@@ -16,6 +16,10 @@ class Product(db.Model):
     # Relationship to Store model
     store = db.relationship("Store", back_populates="products")
 
+
+    #Relationship with user suscriptions
+    subscriptions = db.relationship("UserSubscription", back_populates="product", cascade="all, delete-orphan")
+
     def __init__(self, store_id, name, product_type, unit_price, detail, score, image):
         self.store_id = store_id
         self.name = name
