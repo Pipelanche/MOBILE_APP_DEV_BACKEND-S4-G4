@@ -14,6 +14,9 @@ class Cart(db.Model):
     # Relationship with User
     user = db.relationship("User", back_populates="carts")
 
+    #Relationship with cart products
+    cart_products = db.relationship("CartProduct", back_populates="cart", cascade="all, delete-orphan")
+
     def __init__(self, user_id, status, status_date=None):
         self.user_id = user_id
         self.status = Status(status)  # Ensure it's a valid enum

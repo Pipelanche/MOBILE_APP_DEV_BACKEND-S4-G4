@@ -25,7 +25,10 @@ class Product(db.Model):
 
      # Relationship with UserRating
     ratings = db.relationship("UserRating", back_populates="product", cascade="all, delete-orphan")
-
+    
+    # Relationship with CartProduct
+    cart_products = db.relationship("CartProduct", back_populates="product", cascade="all, delete-orphan")
+    
     def __init__(self, store_id, name, product_type, unit_price, detail, score, image):
         self.store_id = store_id
         self.name = name
