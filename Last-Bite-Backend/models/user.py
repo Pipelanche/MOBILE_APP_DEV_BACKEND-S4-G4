@@ -26,6 +26,9 @@ class User(db.Model):
     #Relationship with the suscriptions
     subscriptions = db.relationship("UserSubscription", back_populates="user", cascade="all, delete-orphan")
 
+    #Relationship with the user ratings
+    ratings = db.relationship("UserRating", back_populates="user", cascade="all, delete-orphan")
+
     def __init__(self, name, user_email, mobile_number, area_id, verification_code ,user_type, description=None):
         self.name = name
         self.user_email = user_email

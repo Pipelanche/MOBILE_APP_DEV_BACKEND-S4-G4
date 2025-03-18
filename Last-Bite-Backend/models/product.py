@@ -23,6 +23,9 @@ class Product(db.Model):
      # Relationship with ProductTag
     tags = db.relationship("ProductTag", back_populates="product", cascade="all, delete-orphan")
 
+     # Relationship with UserRating
+    ratings = db.relationship("UserRating", back_populates="product", cascade="all, delete-orphan")
+
     def __init__(self, store_id, name, product_type, unit_price, detail, score, image):
         self.store_id = store_id
         self.name = name
