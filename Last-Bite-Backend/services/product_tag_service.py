@@ -1,6 +1,8 @@
 from models.product_tag import ProductTag
 from app import db
 
+MAX_TAGS_PER_PRODUCT = 5
+
 def get_all_tags():
     """Fetch all product tags from the database."""
     return ProductTag.query.all()
@@ -14,7 +16,14 @@ def get_tag_by_id(product_tag_id):
     return ProductTag.query.get(product_tag_id)
 
 def create_product_tag(product_id, value):
-    """Create a new product tag."""
+    """Create a new product tag, ensuring no more than 5 tags per product."""
+    
+    tag_count = ProductTag.query.filter_by(product_id=product_id).count()
+    
+    if tag_count >= MAX_TAGS_PER_PRODUCT:
+        return {"error": f"A product can have a maximum of {MAX_TAGS_PER_PRODUCT} tags"}, 400  # HTTP 400 Bad Request
+
+    # Create and save the new tag
     new_tag = ProductTag(product_id, value)
     db.session.add(new_tag)
     db.session.commit()
