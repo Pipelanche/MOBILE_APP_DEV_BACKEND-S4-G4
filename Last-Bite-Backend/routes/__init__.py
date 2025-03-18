@@ -8,6 +8,7 @@ from routes.user_subscription_routes import subscription_bp
 from routes.product_tag_routes import tag_bp
 from routes.user_rating_routes import rating_bp
 from routes.cart_routes import cart_bp
+from routes.cart_product_routes import cart_product_bp
 
 def register_routes(app):
     app.register_blueprint(user_bp, url_prefix="/api/users")
@@ -20,3 +21,4 @@ def register_routes(app):
     app.register_blueprint(tag_bp, url_prefix="/api/tags")
     app.register_blueprint(rating_bp, url_prefix="/api/ratings")
     app.register_blueprint(cart_bp, url_prefix="/api/carts")
+    app.register_blueprint(cart_product_bp, url_prefix="/api/cart_products")
