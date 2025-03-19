@@ -22,4 +22,4 @@ def register_routes(app):
     app.register_blueprint(tag_bp, url_prefix="/api/tags")
     app.register_blueprint(rating_bp, url_prefix="/api/ratings")
     app.register_blueprint(cart_bp, url_prefix="/api/carts")
-    app.register_blueprint(cart_product_bp, url_prefix="/api/orders")
+    app.register_blueprint(order_bp, url_prefix="/api/orders")

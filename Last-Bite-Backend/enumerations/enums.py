@@ -17,5 +17,6 @@ class SubscriptionType(Enum):
 class Status(Enum):
     ACTIVE = 'ACTIVE'
     PAYMENT_PROGRESS = 'PAYMENT_PROGRESS'
+    PAYMENT_DECLINED = 'PAYMENT_DECLINED'
     BILLED = 'BILLED'
     DISABLED = 'DISABLED'

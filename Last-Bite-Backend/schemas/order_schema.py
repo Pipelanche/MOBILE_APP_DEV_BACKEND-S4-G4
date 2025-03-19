@@ -9,3 +9,8 @@ class OrderSchema(Schema):
     status = fields.Str(required=True, validate=validate.OneOf([s.value for s in Status]))  # Validate enum
     billed_date = fields.Date(required=False)  # Optional
     total_price = fields.Float(required=True)  # Total price
+
+# ✅ Schema for updates (only requires `order_id`, `status`, `total_price`)
+class OrderUpdateSchema(Schema):
+    status = fields.Str(required=True, validate=validate.OneOf([s.value for s in Status]))
+    total_price = fields.Float(required=True)

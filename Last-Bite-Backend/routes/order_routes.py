@@ -1,12 +1,13 @@
 from flask import Blueprint, jsonify, request
 from services.order_service import *
-from schemas.order_schema import OrderSchema
+from schemas.order_schema import OrderSchema, OrderUpdateSchema
 
 order_bp = Blueprint("order_bp", __name__)
 
 # Initialize Schema
 order_schema = OrderSchema()
 orders_schema = OrderSchema(many=True)
+order_update_schema = OrderUpdateSchema() 
 
 # ✅ GET all orders
 @order_bp.route("/", methods=["GET"])
@@ -51,13 +52,13 @@ def modify_order(order_id):
     data = request.get_json()
     
     # Validate input
-    errors = order_schema.validate(data)
+    errors = order_update_schema.validate(data)
     if errors:
         return jsonify({"error": errors}), 400
 
     updated_order = update_order(order_id, data["status"], data["total_price"])
     if updated_order:
-        return jsonify(order_schema.dump(updated_order))
+        return jsonify(order_update_schema.dump(updated_order))
     return jsonify({"error": "Order not found"}), 404
 
 # ✅ DELETE an order
