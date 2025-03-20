@@ -1629,7 +1629,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"cart_id\": 1,\n    \"product_id\": 10\n}",
+							"raw": "{\n    \"cart_id\": 1,\n    \"product_id\": 10,\n    \"quantity\": 3\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1649,6 +1649,42 @@
 							"path": [
 								"api",
 								"cart_products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"quantity\":3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/cart_products/cart/1/product/10",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"cart_products",
+								"cart",
+								"1",
+								"product",
+								"10"
 							]
 						}
 					},

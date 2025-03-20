@@ -8,11 +8,13 @@ class CartProduct(db.Model):
 
     cart_id = db.Column(db.Integer, db.ForeignKey("cart.cart_id"), primary_key=True, nullable=False)  # FK to Cart
     product_id = db.Column(db.Integer, db.ForeignKey("product.product_id"), primary_key=True, nullable=False)  # FK to Product
+    quantity = db.Column(db.Integer, nullable=False, default=1)
 
     # Relationships
     cart = db.relationship("Cart", back_populates="cart_products")
     product = db.relationship("Product", back_populates="cart_products")
 
-    def __init__(self, cart_id, product_id):
+    def __init__(self, cart_id, product_id, quantity=1):
         self.cart_id = cart_id
         self.product_id = product_id
+        self.quantity = quantity
