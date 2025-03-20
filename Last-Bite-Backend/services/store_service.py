@@ -1,5 +1,6 @@
 from models.store import Store
 from app import db
+from math import radians, cos, sin, sqrt, atan2
 
 def get_all_stores():
     """Fetch all stores from the database."""
@@ -50,3 +51,35 @@ def delete_store(store_id):
     db.session.delete(store)
     db.session.commit()
     return {"message": f"Store {store_id} deleted successfully"}
+
+EARTH_RADIUS_KM = 6371  # Earth radius in kilometers
+
+def calculate_distance(lat1, lon1, lat2, lon2):
+    """Calculate distance between two coordinates using Haversine formula."""
+    lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
+
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+    return EARTH_RADIUS_KM * c  # Distance in kilometers
+
+def get_nearby_stores(lat, lon, radius_km=5):
+    """Find stores within a given radius (default: 5km)."""
+    stores = Store.query.all()  # Fetch all stores from DB
+    nearby_stores = []
+
+    for store in stores:
+        distance = calculate_distance(lat, lon, store.latitude, store.longitude)
+        
+        # ✅ Debugging print statement with type casting
+        print(f"Store ID: {store.store_id} | Distance: {distance:.2f} km")
+        
+        if distance <= radius_km:
+            nearby_stores.append(store)
+
+    print(nearby_stores)
+    return nearby_stores
+
