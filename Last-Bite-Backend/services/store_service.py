@@ -79,7 +79,5 @@ def get_nearby_stores(lat, lon, radius_km=5):
         
         if distance <= radius_km:
             nearby_stores.append(store)
-
-    print(nearby_stores)
     return nearby_stores
 
