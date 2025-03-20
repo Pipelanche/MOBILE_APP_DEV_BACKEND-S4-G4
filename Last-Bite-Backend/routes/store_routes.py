@@ -71,3 +71,16 @@ def remove_store(store_id):
     if result:
         return jsonify(result)
     return jsonify({"error": "Store not found"}), 404
+
+#Get nearby stores
+@store_bp.route("/nearby", methods=["GET"])
+def get_nearby():
+    lat = request.args.get("lat", type=float)
+    lon = request.args.get("lon", type=float)
+
+    if lat is None or lon is None:
+        return jsonify({"error": "Latitude and Longitude are required"}), 400
+
+    stores = get_nearby_stores(lat, lon)
+    print(stores)
+    return jsonify(stores_schema.dump(stores))
