@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from services.user_service import get_all_users, get_user_by_id, create_user, update_user, delete_user
+from services.user_service import *
 from schemas.user_schema import UserSchema
 
 user_bp = Blueprint("user_bp", __name__)
@@ -56,4 +56,17 @@ def remove_user(user_id):
     result = delete_user(user_id)
     if result:
         return jsonify(result)
+    return jsonify({"error": "User not found"}), 404
+
+# ✅ GET a user by email
+@user_bp.route("/email", methods=["GET"])
+def get_user_by_email_route():
+    email = request.args.get("email")
+
+    if not email:
+        return jsonify({"error": "Email query parameter is required"}), 400
+
+    user = get_user_by_email(email)
+    if user:
+        return jsonify(user_schema.dump(user))
     return jsonify({"error": "User not found"}), 404

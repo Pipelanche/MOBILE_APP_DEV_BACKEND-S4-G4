@@ -67,3 +67,10 @@ def remove_cart(cart_id):
     if result:
         return jsonify(result)
     return jsonify({"error": "Cart not found"}), 404
+
+@cart_bp.route("/user/<int:user_id>/active", methods=["GET"])
+def get_active_cart_route(user_id):
+    cart = get_active_cart(user_id)
+    if cart:
+        return jsonify(cart_schema.dump(cart))
+    return jsonify({"error": "No active cart found"}), 404

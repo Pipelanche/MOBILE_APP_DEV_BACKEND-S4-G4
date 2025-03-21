@@ -39,3 +39,7 @@ def delete_user(user_id):
         db.session.commit()
         return {"message": f"User {user_id} deleted successfully"}
     return None
+
+def get_user_by_email(email):
+    """Fetch a user by their email."""
+    return User.query.filter_by(user_email=email).first()
