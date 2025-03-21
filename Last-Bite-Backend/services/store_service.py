@@ -1,6 +1,8 @@
 from models.store import Store
 from app import db
 from math import radians, cos, sin, sqrt, atan2
+from models.product import Product
+from sqlalchemy import func, desc
 
 def get_all_stores():
     """Fetch all stores from the database."""
@@ -81,3 +83,17 @@ def get_nearby_stores(lat, lon, radius_km=5):
             nearby_stores.append(store)
     return nearby_stores
 
+def get_top_valuable_stores(limit=3):
+    """
+    Return the top N stores with the most valuable products based on average score.
+    Does not return product info, only store details.
+    """
+    top_stores = (
+        db.session.query(Store)
+        .join(Product, Store.store_id == Product.store_id)
+        .group_by(Store.store_id)
+        .order_by(desc(func.avg(Product.score)))
+        .limit(limit)
+        .all()
+    )
+    return top_stores

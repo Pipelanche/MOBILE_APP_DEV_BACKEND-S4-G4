@@ -84,3 +84,8 @@ def get_nearby():
     stores = get_nearby_stores(lat, lon)
     print(stores)
     return jsonify(stores_schema.dump(stores))
+
+@store_bp.route("/top", methods=["GET"])
+def get_top_stores():
+    top_stores = get_top_valuable_stores()
+    return jsonify(stores_schema.dump(top_stores))
