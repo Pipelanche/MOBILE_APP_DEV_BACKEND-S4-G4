@@ -1,4 +1,4 @@
-INSERT INTO store (nit, name, address, longitude, latitude, logo) VALUES
+INSERT INTO store (nit, name, address, latitude, longitude, logo) VALUES
 (1234567891,'Éxito','cra 23 direccion 1',4.3026373115,-74.7651941308,'https://firebasestorage.googleapis.com/v0/b/lastbite-5dd6f.firebasestorage.app/o/Exito.png?alt=media&token=a60726b6-cb7c-4e9f-9b7f-5ed9ac7fd186'),
 (1234567892,'Carulla','cra 23 direccion 2',4.2801627549,-74.7648938449,'https://firebasestorage.googleapis.com/v0/b/lastbite-5dd6f.firebasestorage.app/o/Carulla.png?alt=media&token=b00c02ec-8917-4686-a8e0-a707102f24e2'),
 (1234567893,'Jumbo','cra 23 direccion 3',4.2885973859,-74.7718930335,'https://firebasestorage.googleapis.com/v0/b/lastbite-5dd6f.firebasestorage.app/o/Jumbo.png?alt=media&token=dc399dda-f773-48f5-8442-a3447579a5f3'),
@@ -28,4 +28,4 @@ INSERT INTO store (nit, name, address, longitude, latitude, logo) VALUES
 (1234567917,'KFC','cra 23 direccion 27',4.764676258,-74.02508393,'https://firebasestorage.googleapis.com/v0/b/lastbite-5dd6f.firebasestorage.app/o/KFC.png?alt=media&token=c0138b12-e03f-487b-b6cf-378fac32fdf5'),
 (1234567918,'Juan Valdez','cra 23 direccion 28',4.817477664,-74.06842376,'https://firebasestorage.googleapis.com/v0/b/lastbite-5dd6f.firebasestorage.app/o/Juan%20Valdez.png?alt=media&token=598b51eb-92dd-4331-a1fa-f5b8106bbfab'),
 (1234567919,'Oma','cra 23 direccion 29',4.756876753,-73.98082084,'https://firebasestorage.googleapis.com/v0/b/lastbite-5dd6f.firebasestorage.app/o/Oma.png?alt=media&token=461d8aab-c449-44c1-aae6-cea4fb90fd00'),
-(1234567920,'Kokoriko','cra 23 direccion 30',4.800547418,-74.05616485,'https://firebasestorage.googleapis.com/v0/b/lastbite-5dd6f.firebasestorage.app/o/Kokoriko.png?alt=media&token=219d9e04-153f-4c0d-a35e-c9ac8865dcd2');
+(1234567920,'Kokoriko','cra 23 direccion 30',4.6015417,-74.0672132,'https://firebasestorage.googleapis.com/v0/b/lastbite-5dd6f.firebasestorage.app/o/Kokoriko.png?alt=media&token=219d9e04-153f-4c0d-a35e-c9ac8865dcd2');
