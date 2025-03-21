@@ -51,3 +51,9 @@ def update_product_quantity_route(cart_id, product_id):
 def remove_product_from_cart_route(cart_id, product_id):
     result = remove_product_from_cart(cart_id, product_id)
     return jsonify(result)
+
+@cart_product_bp.route("/cart/<int:cart_id>/detailed", methods=["GET"])
+def get_detailed_products_in_cart(cart_id):
+    products = get_product_details_in_cart(cart_id)
+    return jsonify(products)
+

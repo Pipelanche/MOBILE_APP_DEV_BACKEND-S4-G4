@@ -2,6 +2,7 @@ from models.cart_product import CartProduct
 from models.cart import Cart
 from app import db
 from enumerations.enums import Status
+from models.product import Product
 
 def get_products_in_cart(cart_id):
     """Fetch all products in a specific cart."""
@@ -72,3 +73,27 @@ def remove_product_from_cart(cart_id, product_id):
     db.session.delete(cart_product)
     db.session.commit()
     return {"message": f"Product {product_id} removed from cart {cart_id} successfully"}
+
+def get_product_details_in_cart(cart_id):
+    """Fetch full product info with quantity for a specific cart."""
+    cart_products = CartProduct.query.filter_by(cart_id=cart_id).all()
+    
+    # Combine product info + quantity
+    detailed_products = []
+    for cp in cart_products:
+        product = Product.query.get(cp.product_id)
+        if product:
+            product_info = {
+                "product_id": product.product_id,
+                "name": product.name,
+                "type": product.product_type.value,
+                "unit_price": product.unit_price,
+                "detail": product.detail,
+                "score": product.score,
+                "image": product.image,
+                "store_id": product.store_id,
+                "quantity": cp.quantity  # ✅ Include quantity from cart_product
+            }
+            detailed_products.append(product_info)
+    
+    return detailed_products
