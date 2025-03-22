@@ -16,8 +16,12 @@ def get_orders_by_user(user_id):
     """Fetch all orders for a specific user."""
     return Order.query.filter_by(user_id=user_id).all()
 
-def create_order(user_id, cart_id, status, total_price):
-    """Create a new order."""
+def get_orders_not_received_by_user(user_id):
+    """Fetch all orders for a specific user that are not yet received."""
+    return Order.query.filter_by(user_id=user_id, enabled=False).all()
+
+def create_order(user_id, cart_id, status, total_price, enabled):
+    """Create a new order with enabled flag."""
     
     # Check if user exists
     user = User.query.get(user_id)
@@ -33,7 +37,7 @@ def create_order(user_id, cart_id, status, total_price):
     if cart.status == "BILLED":
         return {"error": "Cart has already been billed"}, 400
 
-    new_order = Order(user_id, cart_id, status, total_price)
+    new_order = Order(user_id, cart_id, status, total_price, enabled=enabled)
     db.session.add(new_order)
     db.session.commit()
     return new_order
@@ -63,3 +67,13 @@ def delete_order(order_id):
     db.session.delete(order)
     db.session.commit()
     return {"message": f"Order {order_id} deleted successfully"}
+
+def receive_order(order_id, enabled):
+    """Mark an order as received or not (toggle enabled field)."""
+    order = Order.query.get(order_id)
+    if not order:
+        return None  # Order not found
+
+    order.enabled = enabled
+    db.session.commit()
+    return order

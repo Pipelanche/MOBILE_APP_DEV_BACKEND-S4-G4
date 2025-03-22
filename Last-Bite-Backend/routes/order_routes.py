@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from services.order_service import *
-from schemas.order_schema import OrderSchema, OrderUpdateSchema
+from schemas.order_schema import *
 
 order_bp = Blueprint("order_bp", __name__)
 
@@ -8,6 +8,7 @@ order_bp = Blueprint("order_bp", __name__)
 order_schema = OrderSchema()
 orders_schema = OrderSchema(many=True)
 order_update_schema = OrderUpdateSchema() 
+order_receive_schema = OrderReceiveSchema() 
 
 # ✅ GET all orders
 @order_bp.route("/", methods=["GET"])
@@ -29,6 +30,12 @@ def get_user_orders(user_id):
     orders = get_orders_by_user(user_id)
     return jsonify(orders_schema.dump(orders))
 
+# ✅ GET orders not received by user
+@order_bp.route("/user/<int:user_id>/notreceived", methods=["GET"])
+def get_not_received_user_orders(user_id):
+    orders = get_orders_not_received_by_user(user_id)
+    return jsonify(orders_schema.dump(orders))
+
 # ✅ CREATE an order
 @order_bp.route("/", methods=["POST"])
 def add_order():
@@ -39,7 +46,16 @@ def add_order():
     if errors:
         return jsonify({"error": errors}), 400
 
-    new_order = create_order(data["user_id"], data["cart_id"], data["status"], data["total_price"])
+    # Get enabled from payload or default to True
+    enabled = data.get("enabled", True)
+
+    new_order = create_order(
+        data["user_id"],
+        data["cart_id"],
+        data["status"],
+        data["total_price"],
+        enabled=enabled
+    )
 
     if isinstance(new_order, dict):  # Check if it returned an error
         return jsonify(new_order), 400
@@ -60,6 +76,24 @@ def modify_order(order_id):
     if updated_order:
         return jsonify(order_update_schema.dump(updated_order))
     return jsonify({"error": "Order not found"}), 404
+
+# ✅ Receive an order
+@order_bp.route("/<int:order_id>/receive", methods=["PUT"])
+def receive_order_route(order_id):  # 🔄 Rename to avoid conflict
+    data = request.get_json()
+    
+    # Validate input
+    errors = order_receive_schema.validate(data)
+    if errors:
+        return jsonify({"error": errors}), 400
+
+    enabled = data.get("enabled")  
+
+    received_order = receive_order(order_id, enabled=enabled)  # ✅ Call service
+    if received_order:
+        return jsonify(order_receive_schema.dump(received_order))
+    return jsonify({"error": "Order not found"}), 404
+
 
 # ✅ DELETE an order
 @order_bp.route("/<int:order_id>", methods=["DELETE"])
