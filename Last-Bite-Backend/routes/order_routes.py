@@ -36,7 +36,7 @@ def get_not_received_user_orders(user_id):
     orders = get_orders_not_received_by_user(user_id)
     return jsonify(orders_schema.dump(orders))
 
-# ✅ CREATE an order    
+# ✅ CREATE an order
 @order_bp.route("/", methods=["POST"])
 def add_order():
     data = request.get_json()
