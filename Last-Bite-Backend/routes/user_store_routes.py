@@ -1,12 +1,17 @@
 from flask import Blueprint, jsonify, request
 from services.user_store_service import *
 from schemas.user_store_schema import UserStoreSchema
+from services.store_service import *
+from schemas.store_schema import StoreSchema
 
 user_store_bp = Blueprint("user_store_bp", __name__)
 
 # Initialize Schema
 user_store_schema = UserStoreSchema()
 user_stores_schema = UserStoreSchema(many=True)
+
+store_schema = StoreSchema()
+stores_schema = StoreSchema(many=True)
 
 # ✅ GET all user-store relationships
 @user_store_bp.route("/", methods=["GET"])
@@ -19,6 +24,12 @@ def get_user_stores():
 def get_stores_by_user(user_id):
     stores = get_user_stores_by_user(user_id)
     return jsonify(user_stores_schema.dump(stores))
+
+# ✅ GET stores for a specific user in store format
+@user_store_bp.route("stores/user/<int:user_id>", methods=["GET"])
+def get_all_stores_by_user(user_id):
+    stores = get_all_user_stores_by_user(user_id)
+    return jsonify(stores_schema.dump(stores))
 
 # ✅ GET users for a specific store
 @user_store_bp.route("/store/<int:store_id>", methods=["GET"])
