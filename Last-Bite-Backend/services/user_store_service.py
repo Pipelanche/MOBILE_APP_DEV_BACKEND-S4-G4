@@ -10,6 +10,10 @@ def get_user_stores_by_user(user_id):
     """Fetch all stores linked to a specific user."""
     return UserStore.query.filter_by(user_id=user_id).all()
 
+def get_all_user_stores_by_user(user_id):
+    user_stores = UserStore.query.filter_by(user_id=user_id).all()
+    return [user_store.store for user_store in user_stores] 
+
 def get_all_users_by_store(store_id):
     """Fetch all users linked to a specific store."""
     return UserStore.query.filter_by(store_id=store_id).all()
