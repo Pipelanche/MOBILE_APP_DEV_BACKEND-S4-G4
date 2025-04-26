@@ -56,4 +56,20 @@ def update_signup_event(user_id, attempt_id):
 
     db.session.commit()
     return event
+
+def get_conversion_rate():
+    completed = SignupEvent.query.filter_by(status='completed').all()
+    attempts = SignupEvent.query.filter_by(status='started').all()
+    total = len(completed) + len(attempts)
+    conversion_rate = len(completed) / total
+    return {
+        "completed": len(completed),
+        "attempts": len(attempts),
+        "total": total,
+        "conversion_rate": conversion_rate
+    }
+
+
+
+
     
