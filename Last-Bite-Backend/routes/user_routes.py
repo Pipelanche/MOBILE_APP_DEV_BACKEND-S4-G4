@@ -81,4 +81,11 @@ def create_signup_event():
     event = SignupEvent()
     db.session.add(event)
     db.session.commit()
+    
     return jsonify({'attempt_id': event.attempt_id}), 201
+
+# ✅ GET signup attempts vs completed
+@user_bp.route('/conversion_rate', methods=['GET'])
+def get_signup_attempts_vs_completed():
+    result = get_conversion_rate()
+    return result
