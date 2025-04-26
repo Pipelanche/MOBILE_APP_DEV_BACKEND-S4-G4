@@ -8,6 +8,7 @@ class UserSchema(Schema):
     mobile_number = fields.Str(required=True, validate=validate.Length(min=1,max=60))
     area_id = fields.Int(required=True)  # Foreign Key
     verification_code = fields.Int(required=True)
+    attempt_id = fields.Str(required=False)
 
     # Enum validation for user_type
     user_type = fields.Str(required=True, validate=validate.OneOf([e.value for e in UserType]))
