@@ -71,3 +71,9 @@ def remove_product(product_id):
     if result:
         return jsonify(result)
     return jsonify({"error": "Product not found"}), 404
+
+# ✅ GET top 3 products by store
+@product_bp.route("/store/<int:store_id>/top3", methods=["GET"])
+def get_top_products_by_store_route(store_id):
+    products = get_top3_products_by_store(store_id)
+    return jsonify(products_schema.dump(products))
