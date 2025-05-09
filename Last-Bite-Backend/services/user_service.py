@@ -69,6 +69,10 @@ def get_conversion_rate():
         "conversion_rate": conversion_rate
     }
 
+def get_all_signup_events():
+    """Fetch all signup events"""
+    return SignupEvent.query.all()
+
 
 
 

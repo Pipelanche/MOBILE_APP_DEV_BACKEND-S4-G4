@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from services.user_service import *
 from schemas.user_schema import UserSchema
+from schemas.signup_event_schema import SignupEventSchema
 from models.signup_events import SignupEvent
 
 user_bp = Blueprint("user_bp", __name__)
@@ -8,6 +9,7 @@ user_bp = Blueprint("user_bp", __name__)
 # Initialize schemas
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
+signups_schema = SignupEventSchema(many=True)
 
 # ✅ GET all users
 @user_bp.route("/", methods=["GET"])
@@ -89,3 +91,10 @@ def create_signup_event():
 def get_signup_attempts_vs_completed():
     result = get_conversion_rate()
     return result
+
+# ✅ Get all signup events
+@user_bp.route('/signup_events', methods=['GET'])
+def get_signup_events():
+    print('llegue')
+    signup_list = get_all_signup_events()
+    return jsonify(signups_schema.dump(signup_list)), 201
