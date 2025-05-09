@@ -14,6 +14,10 @@ def get_products_by_store(store_id):
     """Fetch all products for a specific store."""
     return Product.query.filter_by(store_id=store_id).all()
 
+def get_top3_products_by_store(store_id, limit=3):
+    """Fetch top 3 products by score for a specific store"""
+    return Product.query.filter_by(store_id=store_id).order_by(Product.score.desc()).limit(limit).all()
+
 def create_product(store_id, name, product_type, unit_price, detail, score, image):
     """Create a new product."""
     new_product = Product(store_id, name, product_type, unit_price, detail, score, image)
