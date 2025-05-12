@@ -10,6 +10,9 @@ from routes.user_rating_routes import rating_bp
 from routes.cart_routes import cart_bp
 from routes.cart_product_routes import cart_product_bp
 from routes.order_routes import order_bp
+from routes.location_routes import location_bp
+from routes.product_received_routes import product_received_bp
+from routes.store_count_routes import store_count_bp
 
 def register_routes(app):
     app.register_blueprint(user_bp, url_prefix="/api/users")
@@ -24,3 +27,6 @@ def register_routes(app):
     app.register_blueprint(cart_bp, url_prefix="/api/carts")
     app.register_blueprint(cart_product_bp, url_prefix="/api/cart_products")
     app.register_blueprint(order_bp, url_prefix="/api/orders")
+    app.register_blueprint(location_bp, url_prefix="/api/location")
+    app.register_blueprint(product_received_bp, url_prefix="/api/product_received")
+    app.register_blueprint(store_count_bp, url_prefix="/api/store_counted")

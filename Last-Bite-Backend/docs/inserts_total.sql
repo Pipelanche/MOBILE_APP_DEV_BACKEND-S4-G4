@@ -77,7 +77,7 @@ insert into STORE (address, latitude, logo, longitude, name, nit, store_id ) val
 insert into STORE (address, latitude, logo, longitude, name, nit, store_id ) values ('Suite 14', 4.2820275539, 'https://picsum.photos/350', -74.7932030414, 'InnoZ', 861930917, 27);
 insert into STORE (address, latitude, logo, longitude, name, nit, store_id ) values ('PO Box 52306', 4.2885973859, 'https://picsum.photos/350', -74.7551772758, 'Realblab', 825152494, 28);
 insert into STORE (address, latitude, logo, longitude, name, nit, store_id ) values ('Suite 17', 4.2885973859, 'https://picsum.photos/350', -74.755523475, 'Youbridge', 976902595, 29);
-insert into STORE (address, latitude, logo, longitude, name, nit, store_id ) values ('Suite 3', 4.3146284448, 'https://picsum.photos/350', -74.7761234576, 'Kwilith', 734885095, 30);
+insert into STORE (address, latitude, logo, longitude, name, nit, store_id ) values ('Suite 3', 4.3146284448, 'https://picsum.photos/350', -74.7761234576, 'Kwilith', 734885095, 31);
 
 UPDATE store
 SET logo = 'https://picsum.photos/350';
@@ -235,15 +235,31 @@ INSERT INTO cart_product (cart_id, product_id, quantity) VALUES
 (11, 3, 2),
 (11, 4, 1);
 
-INSERT INTO user_order (user_id, cart_id, creation_date, status, billed_date, total_price) VALUES
-(1, 1, '2025-03-13', 'ACTIVE', NULL, 59.99),
-(2, 2, '2025-03-13', 'PAYMENT_PROGRESS', NULL, 89.50),
-(3, 3, '2025-03-13', 'BILLED', '2025-03-14', 120.75),
-(4, 4, '2025-03-13', 'BILLED', '2025-03-14', 45.25),
-(5, 5, '2025-03-13', 'DISABLED', NULL, 67.80),
-(6, 6, '2025-03-13', 'ACTIVE', NULL, 99.99),
-(7, 7, '2025-03-13', 'PAYMENT_PROGRESS', NULL, 150.00),
-(8, 8, '2025-03-13', 'BILLED', '2025-03-14', 200.45),
-(9, 9, '2025-03-13', 'BILLED', '2025-03-14', 25.60),
-(10, 10, '2025-03-13', 'PAYMENT_DECLINED', NULL, 75.99),
-(11, 11, '2025-03-13', 'ACTIVE', NULL, 99.99);
+INSERT INTO user_order (user_id, cart_id, creation_date, status, billed_date, total_price, enabled) VALUES
+(1, 1, '2025-03-13', 'ACTIVE', NULL, 59.99, 1),
+(2, 2, '2025-03-13', 'PAYMENT_PROGRESS', NULL, 89.50, 1),
+(3, 3, '2025-03-13', 'BILLED', '2025-03-14', 120.75, 0),
+(4, 4, '2025-03-13', 'BILLED', '2025-03-14', 45.25, 0),
+(5, 5, '2025-03-13', 'DISABLED', NULL, 67.80, 0),
+(6, 6, '2025-03-13', 'ACTIVE', NULL, 99.99, 1),
+(7, 7, '2025-03-13', 'PAYMENT_PROGRESS', NULL, 150.00, 1),
+(8, 8, '2025-03-13', 'BILLED', '2025-03-14', 200.45, 0),
+(9, 9, '2025-03-13', 'BILLED', '2025-03-14', 25.60, 0),
+(10, 10, '2025-03-13', 'PAYMENT_DECLINED', NULL, 75.99, 0),
+(11, 11, '2025-03-13', 'ACTIVE', NULL, 99.99, 1);
+
+INSERT INTO location (location_id, latitude, longitude, count) VALUES
+(1, 28.4402, 94.4946, 1),
+(2, 21.8998, 33.6915, 1),
+(3, 9.7746, 28.3975, 1),
+(4, 16.3681, 111.8758, 1),
+(5, 15.2128, 117.732, 1);
+-- (6, 4.6874327, -74.0910411, 1);
+INSERT INTO location (location_id, latitude, longitude, count) VALUES
+(6, 4.6874327, -74.0910411, 1);
+
+INSERT INTO product_received (image_id, image_string) VALUES
+(1, 'asjkdljklsdjklasdkllsajdkas');
+
+INSERT INTO store_count (store_count_id, store_id, user_id, count) VALUES
+(1, 3, 1, 1);
