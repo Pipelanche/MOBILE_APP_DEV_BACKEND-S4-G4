@@ -15,6 +15,8 @@ migrate = Migrate(app, db)  # Flask-Migrate
 
 # Import models here to make sure they are registered
 from models.zone import Zone
+from models.signup_events import SignupEvent
+from models.location import Location
 
 # Import routes
 from routes import register_routes
