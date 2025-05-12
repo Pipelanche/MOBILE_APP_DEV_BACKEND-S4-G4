@@ -1,5 +1,7 @@
 from models.user import User
 from app import db
+from models.signup_events import SignupEvent
+from datetime import datetime, timezone
 
 def get_all_users():
     """Fetch all users from the database."""
@@ -43,3 +45,35 @@ def delete_user(user_id):
 def get_user_by_email(email):
     """Fetch a user by their email."""
     return User.query.filter_by(user_email=email).first()
+
+def update_signup_event(user_id, attempt_id):
+    event = SignupEvent.query.filter_by(attempt_id=attempt_id).first()
+    print(event)
+    if event:
+        event.user_id = user_id
+        event.completed_at = datetime.utcnow()
+        event.status = 'completed'
+
+    db.session.commit()
+    return event
+
+def get_conversion_rate():
+    completed = SignupEvent.query.filter_by(status='completed').all()
+    attempts = SignupEvent.query.filter_by(status='started').all()
+    total = len(completed) + len(attempts)
+    conversion_rate = len(completed) / total
+    return {
+        "completed": len(completed),
+        "attempts": len(attempts),
+        "total": total,
+        "conversion_rate": conversion_rate
+    }
+
+def get_all_signup_events():
+    """Fetch all signup events"""
+    return SignupEvent.query.all()
+
+
+
+
+    
