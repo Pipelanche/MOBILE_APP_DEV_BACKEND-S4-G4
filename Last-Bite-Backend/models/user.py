@@ -20,13 +20,13 @@ class User(db.Model):
     # Relationship with Area
     area = db.relationship("Area", back_populates="users")
 
-    #Relationship with store for users with type STORE
+    # Relationship with store for users with type STORE
     stores = db.relationship("UserStore", back_populates="user", cascade="all, delete-orphan")
 
-    #Relationship with the suscriptions
+    # Relationship with the suscriptions
     subscriptions = db.relationship("UserSubscription", back_populates="user", cascade="all, delete-orphan")
 
-    #Relationship with the user ratings
+    # Relationship with the user ratings
     ratings = db.relationship("UserRating", back_populates="user", cascade="all, delete-orphan")
 
     # Relationship with Cart
@@ -41,5 +41,5 @@ class User(db.Model):
         self.mobile_number = mobile_number
         self.area_id = area_id
         self.verification_code = verification_code
-        self.user_type = UserType(user_type)  # Ensure input is a valid enum
+        self.user_type = UserType(user_type)  # The input has to be a valid enum
         self.description = description
