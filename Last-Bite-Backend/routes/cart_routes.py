@@ -28,7 +28,7 @@ def get_cart(cart_id):
         return jsonify(cart_schema.dump(cart))
     return jsonify({"error": "Cart not found"}), 404
 
-# ✅ CREATE a new cart
+# ✅ GENERATE a new cart
 @cart_bp.route("/", methods=["POST"])
 def add_cart():
     data = request.get_json()
@@ -36,6 +36,7 @@ def add_cart():
     # Validate input
     errors = cart_schema.validate(data)
     if errors:
+        # print("El cart tiene errores en el esquema.")
         return jsonify({"error": errors}), 400
 
     new_cart = create_cart(data["user_id"], data["status"])

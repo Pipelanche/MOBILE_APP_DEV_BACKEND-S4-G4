@@ -21,6 +21,7 @@ def create_cart(user_id, status):
     # Check if user already has an ACTIVE or PAYMENT_PROGRESS cart
     existing_cart = Cart.query.filter(Cart.user_id == user_id, Cart.status.in_(["ACTIVE", "PAYMENT_PROGRESS", "PAYMENT_DECLINED"])).first()
     if existing_cart:
+        # print("El cart ya existe.")
         return {"error": "User already has an active or payment in-progress cart"}, 400
 
     new_cart = Cart(user_id, status)
