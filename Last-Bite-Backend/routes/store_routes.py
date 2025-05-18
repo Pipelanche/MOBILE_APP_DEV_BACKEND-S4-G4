@@ -49,7 +49,7 @@ def modify_store(store_id):
 
     # Validate input
     errors = store_schema.validate(data)
-    print(errors)
+    # print(errors)
     if errors:
         return jsonify({"error": errors}), 400
 
@@ -64,7 +64,7 @@ def modify_store(store_id):
         data["longitude"], data["latitude"], data["opens_at"], data["closes_at"], data["logo"]
     )
 
-    print(updated_store.name)
+    # print(updated_store.name)
 
     if isinstance(updated_store, dict):  # Handle error
         return jsonify(updated_store), 409

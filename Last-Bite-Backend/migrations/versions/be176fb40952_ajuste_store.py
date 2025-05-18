@@ -1,8 +1,8 @@
-"""Añadir opens_at, closes_at, created_at, updated_at a Store con server_default
+"""ajuste store
 
-Revision ID: 1ff6f54b2c47
-Revises: 63073d3c3c46
-Create Date: 2025-05-13 13:56:40.340192
+Revision ID: be176fb40952
+Revises: 9888365c25c8
+Create Date: 2025-05-15 20:18:45.362552
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1ff6f54b2c47'
-down_revision = '63073d3c3c46'
+revision = 'be176fb40952'
+down_revision = '9888365c25c8'
 branch_labels = None
 depends_on = None
 

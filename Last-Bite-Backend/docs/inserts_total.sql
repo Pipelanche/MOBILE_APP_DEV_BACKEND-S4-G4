@@ -77,7 +77,7 @@ insert into STORE (address, latitude, logo, longitude, name, nit, store_id ) val
 insert into STORE (address, latitude, logo, longitude, name, nit, store_id ) values ('Suite 14', 4.2820275539, 'https://picsum.photos/350', -74.7932030414, 'InnoZ', 861930917, 27);
 insert into STORE (address, latitude, logo, longitude, name, nit, store_id ) values ('PO Box 52306', 4.2885973859, 'https://picsum.photos/350', -74.7551772758, 'Realblab', 825152494, 28);
 insert into STORE (address, latitude, logo, longitude, name, nit, store_id ) values ('Suite 17', 4.2885973859, 'https://picsum.photos/350', -74.755523475, 'Youbridge', 976902595, 29);
-insert into STORE (address, latitude, logo, longitude, name, nit, store_id ) values ('Suite 3', 4.3146284448, 'https://picsum.photos/350', -74.7761234576, 'Kwilith', 734885095, 31);
+insert into STORE (address, latitude, logo, longitude, name, nit, store_id ) values ('Suite 3', 4.3146284448, 'https://picsum.photos/350', -74.7761234576, 'Kwilith', 734885095, 30);
 
 UPDATE store
 SET logo = 'https://picsum.photos/350';
@@ -255,8 +255,20 @@ INSERT INTO location (location_id, latitude, longitude, count) VALUES
 (4, 16.3681, 111.8758, 1),
 (5, 15.2128, 117.732, 1);
 -- (6, 4.6874327, -74.0910411, 1);
+
 INSERT INTO location (location_id, latitude, longitude, count) VALUES
-(6, 4.6874327, -74.0910411, 1);
+(6, 6.2518, -75.5640, 63),
+(7, 3.4516, -76.5320, 15),
+(8, 10.9639, -74.7964, 4),
+(9, 10.3997, -75.5144, 5); 
+INSERT INTO location (location_id, latitude, longitude, count) VALUES
+(10, 4.7541706271, -74.08625703, 63),
+(11, 4.7808241926, -74.0438694246, 15),
+(12, 4.7717550465, -74.1111937384, 4),
+(13, 4.7470401245, -74.0438694246, 32),
+(14, 4.8058962677, -74.058454808, 40),
+(15, 4.7654601425, -74.0707640695, 12),
+(16, 4.8174776639, -74.0407268455, 8);
 
 INSERT INTO product_received (image_id, image_string) VALUES
 (1, 'asjkdljklsdjklasdkllsajdkas');
