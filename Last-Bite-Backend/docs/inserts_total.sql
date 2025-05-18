@@ -256,18 +256,7 @@ INSERT INTO location (location_id, latitude, longitude, count) VALUES
 (5, 15.2128, 117.732, 1);
 -- (6, 4.6874327, -74.0910411, 1);
 INSERT INTO location (location_id, latitude, longitude, count) VALUES
-(10, 6.2518, -75.5640, 63),
-(11, 3.4516, -76.5320, 15),
-(12, 10.9639, -74.7964, 4),
-(13, 10.3997, -75.5144, 5); 
-INSERT INTO location (location_id, latitude, longitude, count) VALUES
-(14, 4.7541706271, -74.08625703, 63),
-(15, 4.7808241926, -74.0438694246, 15),
-(16, 4.7717550465, -74.1111937384, 4),
-(17, 4.7470401245, -74.0438694246, 32),
-(18, 4.8058962677, -74.058454808, 40),
-(19, 4.7654601425, -74.0707640695, 12),
-(20, 4.8174776639, -74.0407268455, 8);
+(6, 4.6874327, -74.0910411, 1);
 
 INSERT INTO product_received (image_id, image_string) VALUES
 (1, 'asjkdljklsdjklasdkllsajdkas');
