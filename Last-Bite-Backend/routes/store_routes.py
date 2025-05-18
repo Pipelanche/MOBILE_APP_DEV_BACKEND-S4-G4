@@ -49,13 +49,23 @@ def modify_store(store_id):
 
     # Validate input
     errors = store_schema.validate(data)
+    print(errors)
     if errors:
         return jsonify({"error": errors}), 400
 
-    updated_store = update_store(
+    
+    if data.get("logo") is None:
+            updated_store = update_store(
         store_id, data["nit"], data["name"], data["address"],
-        data["longitude"], data["latitude"], data["logo"]
+        data["longitude"], data["latitude"], data["opens_at"], data["closes_at"]
     )
+    else:
+        updated_store = update_store(
+        store_id, data["nit"], data["name"], data["address"],
+        data["longitude"], data["latitude"], data["opens_at"], data["closes_at"], data["logo"]
+    )
+
+    print(updated_store.name)
 
     if isinstance(updated_store, dict):  # Handle error
         return jsonify(updated_store), 409

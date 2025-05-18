@@ -3,6 +3,7 @@ from app import db
 from math import radians, cos, sin, sqrt, atan2
 from models.product import Product
 from sqlalchemy import func, desc
+from datetime import datetime
 
 def get_all_stores():
     """Fetch all stores from the database."""
@@ -23,7 +24,7 @@ def create_store(nit, name, address, longitude, latitude, logo):
     db.session.commit()
     return new_store
 
-def update_store(store_id, nit, name, address, longitude, latitude, logo):
+def update_store(store_id, nit, name, address, longitude, latitude, opens_at, closes_at, logo=None):
     """Update an existing store."""
     store = Store.query.get(store_id)
     if not store:
@@ -39,8 +40,41 @@ def update_store(store_id, nit, name, address, longitude, latitude, logo):
     store.address = address
     store.longitude = longitude
     store.latitude = latitude
-    store.logo = logo
+    if logo:
+        store.logo = logo
+  # Asegurarse de que longitud y latitud sean floats
+    try:
+        store.longitude = float(longitude)
+        store.latitude = float(latitude)
+    except (ValueError, TypeError) as e:
+        raise ValueError(f"Longitud o latitud inválida: {e}")
+    
+    # --- Convertir cadenas de hora a objetos datetime.time ---
+    try:
+        # Asumimos que opens_at y closes_at son cadenas en formato "HH:MM:SS"
+        # Si el formato puede variar (ej. "HH:MM"), ajusta el string de formato.
+        if isinstance(opens_at, str):
+            store.opens_at = datetime.strptime(opens_at, '%H:%M:%S').time()
+        elif isinstance(opens_at, time): # Si ya es un objeto time
+            store.opens_at = opens_at
+        else:
+            raise ValueError("Formato de 'opens_at' inválido. Se esperaba una cadena HH:MM:SS o un objeto time.")
 
+        if isinstance(closes_at, str):
+            store.closes_at = datetime.strptime(closes_at, '%H:%M:%S').time()
+        elif isinstance(closes_at, time): # Si ya es un objeto time
+            store.closes_at = closes_at
+        else:
+            raise ValueError("Formato de 'closes_at' inválido. Se esperaba una cadena HH:MM:SS o un objeto time.")
+            
+    except ValueError as e:
+        # Si el formato de la hora es incorrecto, strptime lanzará un ValueError.
+        # Relanzamos como un error más específico o lo manejamos.
+        raise ValueError(f"Formato de hora inválido. Asegúrate de que sea 'HH:MM:SS'. Detalle: {e}")
+
+    store.updated_at = datetime.now()
+    # Print store details as JSON
+    print(store.name)
     db.session.commit()
     return store
 
