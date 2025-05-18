@@ -53,6 +53,7 @@ def modify_store(store_id):
     if errors:
         return jsonify({"error": errors}), 400
 
+    
     if data.get("logo") is None:
             updated_store = update_store(
         store_id, data["nit"], data["name"], data["address"],

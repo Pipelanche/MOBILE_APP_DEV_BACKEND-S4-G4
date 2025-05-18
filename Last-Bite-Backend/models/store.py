@@ -17,8 +17,6 @@ class Store(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, server_default=sqlalchemy_func.now()) # Usar server_default
     updated_at = db.Column(db.DateTime, nullable=False, server_default=sqlalchemy_func.now(), onupdate=sqlalchemy_func.now())
 
-
-
     #Relationship with users store that have all the users from the store
     users = db.relationship("UserStore", back_populates="store", cascade="all, delete-orphan")
 
@@ -36,4 +34,3 @@ class Store(db.Model):
         self.closes_at = closes_at
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        
