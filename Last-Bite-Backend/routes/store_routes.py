@@ -34,7 +34,7 @@ def add_store():
 
     new_store = create_store(
         data["nit"], data["name"], data["address"],
-        data["longitude"], data["latitude"], data["logo"]
+        data["longitude"], data["latitude"], data["logo"], data["opens_at"], data["closes_at"] 
     )
 
     if isinstance(new_store, dict):  # Handle error

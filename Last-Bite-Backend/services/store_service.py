@@ -13,15 +13,35 @@ def get_store_by_id(store_id):
     """Fetch a single store by ID."""
     return Store.query.get(store_id)
 
-def create_store(nit, name, address, longitude, latitude, logo):
+def create_store(nit, name, address, longitude, latitude, logo, opens_at, closes_at):
     """Create a new store in the database."""
-    existing_store = Store.query.filter_by(nit=nit).first()
-    if existing_store:
-        return {"error": "Store with this NIT already exists"}, 409  # Conflict error
+    # 1. Verificar conflicto de NIT
+    existing = Store.query.filter_by(nit=nit).first()
+    if existing:
+        return {"error": "Store with this NIT already exists"}, 409
 
-    new_store = Store(nit, name, address, longitude, latitude, logo)
+    # 2. Parsear los horarios si vienen como cadenas
+    if isinstance(opens_at, str):
+        opens_at = datetime.strptime(opens_at, "%H:%M:%S").time()
+    if isinstance(closes_at, str):
+        closes_at = datetime.strptime(closes_at, "%H:%M:%S").time()
+
+    # 3. Crear instancia con keyword args
+    new_store = Store(
+        nit=nit,
+        name=name,
+        address=address,
+        longitude=longitude,
+        latitude=latitude,
+        logo=logo,
+        opens_at=opens_at,
+        closes_at=closes_at
+    )
+
+    # 4. Persistir en la base
     db.session.add(new_store)
     db.session.commit()
+
     return new_store
 
 def update_store(store_id, nit, name, address, longitude, latitude, opens_at, closes_at, logo=None):
