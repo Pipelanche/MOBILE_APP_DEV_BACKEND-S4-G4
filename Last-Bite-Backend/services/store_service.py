@@ -131,3 +131,8 @@ def get_top_valuable_stores(limit=3):
         .all()
     )
     return top_stores
+
+def get_recently_updated_percentage():
+    recently_updated_stores = Store.query.filter(Store.updated_at >= datetime.now() - timedelta(days=90)).count()
+    total_stores = Store.query.count()
+    return (recently_updated_stores / total_stores) * 100
