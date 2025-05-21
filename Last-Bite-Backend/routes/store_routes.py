@@ -101,5 +101,5 @@ def get_top_stores():
 
 @store_bp.route("/recently-updated-percentage", methods=["GET"])
 def get_recently_updated_percentage():
-    recently_updated_percentage = get_recently_updated_percentage()
+    recently_updated_percentage = get_recently_updated_percentage_service()
     return jsonify(recently_updated_percentage)

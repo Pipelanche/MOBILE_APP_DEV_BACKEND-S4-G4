@@ -3,7 +3,8 @@ from app import db
 from math import radians, cos, sin, sqrt, atan2
 from models.product import Product
 from sqlalchemy import func, desc
-from datetime import datetime
+from datetime import datetime, timedelta
+from time import time
 
 def get_all_stores():
     """Fetch all stores from the database."""
@@ -132,7 +133,12 @@ def get_top_valuable_stores(limit=3):
     )
     return top_stores
 
-def get_recently_updated_percentage():
+def get_recently_updated_percentage_service():
     recently_updated_stores = Store.query.filter(Store.updated_at >= datetime.now() - timedelta(days=90)).count()
     total_stores = Store.query.count()
-    return (recently_updated_stores / total_stores) * 100
+    json_to_return = {
+        "recently_updated_stores": recently_updated_stores,
+        "total_stores": total_stores,
+        "percentage": (recently_updated_stores / total_stores) * 100
+    }
+    return json_to_return
