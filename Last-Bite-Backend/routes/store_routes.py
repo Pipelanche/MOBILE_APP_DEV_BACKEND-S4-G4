@@ -98,3 +98,8 @@ def get_nearby():
 def get_top_stores():
     top_stores = get_top_valuable_stores()
     return jsonify(stores_schema.dump(top_stores))
+
+@store_bp.route("/recently-updated-percentage", methods=["GET"])
+def get_recently_updated_percentage():
+    recently_updated_percentage = get_recently_updated_percentage_service()
+    return jsonify(recently_updated_percentage)
