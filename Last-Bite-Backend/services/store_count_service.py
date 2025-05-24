@@ -21,3 +21,8 @@ def update_store_count(store_count):
     store_count.count = StoreCount.count + 1
     db.session.commit()
     return store_count
+
+def get_top_store_by_user_id(user_id):
+    """Fetch the Store Count entites associated with a user."""
+    return StoreCount.query.filter(StoreCount.user_id==user_id).order_by(StoreCount.count).first()
+

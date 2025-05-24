@@ -132,7 +132,7 @@ def get_nearby_stores(lat, lon, radius_km=5):
         distance = calculate_distance(lat, lon, store.latitude, store.longitude)
         
         # ✅ Debugging print statement with type casting
-        print(f"Store ID: {store.store_id} | Distance: {distance:.2f} km")
+        # print(f"Store ID: {store.store_id} | Distance: {distance:.2f} km")
         
         if distance <= radius_km:
             nearby_stores.append(store)
