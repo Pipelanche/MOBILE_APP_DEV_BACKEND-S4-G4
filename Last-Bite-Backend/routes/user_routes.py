@@ -25,18 +25,19 @@ def get_user(user_id):
         return jsonify(user_schema.dump(user))
     return jsonify({"error": "User not found"}), 404
 
-# ✅ CREATE a new user
+# ✅ GENERATE a new user
 @user_bp.route("/", methods=["POST"])
 def add_user():
     print("Adding new user...")
     data = request.get_json()
-    print(data["attempt_id"])
+    # print(data["attempt_id"])
     # Validate input using schema
     errors = user_schema.validate(data)
     if errors:
         return jsonify(errors), 400
     new_user = create_user(data["name"], data["user_email"], data["mobile_number"], data["area_id"],  data.get("verification_code"), data["user_type"], data.get("description"))
-    update_signup_event(new_user.user_id, data["attempt_id"])
+    if "attempt_id" in data:
+        update_signup_event(new_user.user_id, data["attempt_id"])
     return jsonify(user_schema.dump(new_user)), 201
 
 # ✅ UPDATE a user
@@ -75,11 +76,11 @@ def get_user_by_email_route():
         return jsonify(user_schema.dump(user))
     return jsonify({"error": "User not found"}), 404
 
-# ✅ CREATE a signup event
+# ✅ GENERATE a signup event
 @user_bp.route('/signup_events', methods=['POST'])
 def create_signup_event():
-    print("Creating signup event...")
-    # Inserta intento
+    print("Generating signup event...")
+    # Insert attempt
     event = SignupEvent()
     db.session.add(event)
     db.session.commit()
