@@ -24,5 +24,8 @@ def update_store_count(store_count):
 
 def get_top_store_by_user_id(user_id):
     """Fetch the Store Count entites associated with a user."""
-    return StoreCount.query.filter(StoreCount.user_id==user_id).order_by(StoreCount.count).first()
+    return StoreCount.query.filter(StoreCount.user_id==user_id).order_by(StoreCount.count.desc()).first()
 
+def get_least_visited_store_by_user_id(user_id):
+    """Fetch the Store Count entities associated with a user."""
+    return StoreCount.query.filter(StoreCount.user_id==user_id).order_by(StoreCount.count.asc()).first()

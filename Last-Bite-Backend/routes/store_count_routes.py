@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from services.store_count_service import generate_store_count, get_store_count_by_store_and_user_id, update_store_count, get_top_store_by_user_id
+from services.store_count_service import generate_store_count, get_store_count_by_store_and_user_id, update_store_count, get_top_store_by_user_id, get_least_visited_store_by_user_id
 from services.store_service import get_store_by_id
 from schemas.store_count_schema import StoreCountSchema
 from schemas.store_schema import StoreSchema
@@ -38,10 +38,19 @@ def get_store_counts_all():
     store_counts_list = get_store_counts_all()
     return jsonify(store_counts_schema.dump(store_counts_list)), 200
 
-# GET all Top 3 Stores 
+# GET Top 1 Store 
 @store_count_bp.route("/top1/<int:user_id>", strict_slashes=False, methods=["GET"])
-def get_top_3_stores(user_id):
-
+def get_top_1_store(user_id):
+    
     top_store_id_by_user_id = get_top_store_by_user_id(user_id)
     get_full_top_store_info = get_store_by_id(top_store_id_by_user_id.store_id)
     return jsonify(store_schema.dump(get_full_top_store_info)), 200
+
+# GET least visited store
+@store_count_bp.route("/least_visited/<int:user_id>", strict_slashes=False, methods=["GET"])
+def get_least_visited_store(user_id):
+    
+    least_visited_store = get_least_visited_store_by_user_id(user_id)
+    get_full_store_info = get_store_by_id(least_visited_store.store_id)
+    return jsonify(store_schema.dump(get_full_store_info)), 200
+    
